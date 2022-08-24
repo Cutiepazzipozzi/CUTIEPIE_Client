@@ -17,7 +17,7 @@ const Style = {
     top: 0px;
   `,
   InnerWrapper: styled.div`
-    width: 1280px;
+    width: 1260px;
     height: 43px;
     display: flex;
     justify-content: space-between;

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Logo from "./Logo";
 import UserMenu from "./UserMenu";
 
 const Style = {
@@ -14,6 +15,7 @@ export default function Header() {
   return (
     <Style.Wrapper>
       <UserMenu />
+      <Logo />
     </Style.Wrapper>
   );
 }

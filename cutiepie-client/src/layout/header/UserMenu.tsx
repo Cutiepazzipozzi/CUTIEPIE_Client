@@ -10,8 +10,8 @@ const Style = {
     display: flex;
     justify-content: center;
     align-items: center;
-    @media (max-width: 1280px) {
-      width: 1280px;
+    @media (max-width: 1260px) {
+      width: 1260px;
     }
     position: sticky;
     top: 0px;

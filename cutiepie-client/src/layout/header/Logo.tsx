@@ -1,0 +1,61 @@
+import Image from "next/image";
+import styled from "styled-components";
+
+const Style = {
+  Wrapper: styled.div`
+    width: 100vw;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    @media (max-width: 1260px) {
+      width: 1260px;
+    }
+    border-bottom: 1px solid;
+  `,
+  InnerWrapper: styled.div`
+    width: 1260px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    font-size: 50px;
+    font-weight: 600;
+  `,
+  LinkBox: styled.div`
+    width: fit-content;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    gap: 5px;
+    padding-left: 5px;
+    padding-bottom: 5px;
+  `,
+};
+
+export default function Logo() {
+  return (
+    <Style.Wrapper>
+      <Style.InnerWrapper>
+        CUTIE&nbsp;<span style={{ fontWeight: "400" }}>PIE</span>
+        <Style.LinkBox>
+          <Image
+            width={28}
+            height={28}
+            src="/facebook.svg"
+            alt="facebook"
+            style={{ cursor: "pointer" }}
+          />
+          <Image
+            width={28}
+            height={28}
+            src="/instagram.svg"
+            alt="instagram"
+            style={{ borderRadius: "28px", cursor: "pointer" }}
+          />
+        </Style.LinkBox>
+      </Style.InnerWrapper>
+    </Style.Wrapper>
+  );
+}

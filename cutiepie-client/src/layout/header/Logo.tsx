@@ -29,7 +29,6 @@ const Style = {
     left: 0;
     display: flex;
     gap: 5px;
-    padding-left: 5px;
     padding-bottom: 5px;
   `,
 };
@@ -53,6 +52,9 @@ export default function Logo() {
             src="/instagram.svg"
             alt="instagram"
             style={{ borderRadius: "28px", cursor: "pointer" }}
+            onClick={() => {
+              window.location.href = "https://youngstagram-demo.vercel.app";
+            }}
           />
         </Style.LinkBox>
       </Style.InnerWrapper>

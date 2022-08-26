@@ -48,7 +48,7 @@ export default function Nav() {
           />
         </Style.Menu>
         <Style.NavItem>Best</Style.NavItem>
-        <Style.NavItem>New10%</Style.NavItem>
+        <Style.NavItem style={{ color: "red" }}>New10%</Style.NavItem>
         <Style.NavItem>Made</Style.NavItem>
         <Style.NavItem>플리마켓~80%</Style.NavItem>
         <Style.NavItem>|</Style.NavItem>
@@ -59,5 +59,3 @@ export default function Nav() {
     </Style.Wrapper>
   );
 }
-
-// Best New10% Made 플리마켓~80% 상의 하의 악세서리

@@ -10,6 +10,8 @@ const Style = {
   Wrapper: styled.div`
     width: 100vw;
     min-height: 200vh;
+    overflow-y: auto;
+    z-index: 1;
   `,
 };
 

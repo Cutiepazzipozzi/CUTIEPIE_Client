@@ -15,6 +15,7 @@ const Style = {
     }
     position: sticky;
     top: 0px;
+    align-self: flex-start;
   `,
   InnerWrapper: styled.div`
     width: 1260px;

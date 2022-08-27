@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import Header from "./header";
+import Logo from "./header/Logo";
+import Nav from "./header/Nav";
+import UserMenu from "./header/UserMenu";
 
 type Props = {
   children: React.ReactNode;
@@ -9,7 +11,7 @@ type Props = {
 const Style = {
   Wrapper: styled.div`
     width: 100vw;
-    min-height: 200vh;
+    height: 200vh;
     overflow-y: auto;
     z-index: 1;
   `,
@@ -18,7 +20,9 @@ const Style = {
 export default function Layout({ children }: Props) {
   return (
     <Style.Wrapper>
-      <Header />
+      <UserMenu />
+      <Logo />
+      <Nav />
       {children}
     </Style.Wrapper>
   );

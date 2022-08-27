@@ -11,6 +11,7 @@ const Style = {
       width: 1260px;
     }
     border-bottom: 1px solid;
+    margin-top: 43px;
   `,
   InnerWrapper: styled.div`
     width: 1260px;
@@ -37,7 +38,7 @@ export default function Logo() {
   return (
     <Style.Wrapper>
       <Style.InnerWrapper>
-        CUTIE&nbsp;<span style={{ fontWeight: "400" }}>PIE</span>
+        <Image width={486} height={84} src="/logo.png" alt="logo" />
         <Style.LinkBox>
           <Image
             width={28}

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
+import { v4 } from "uuid";
 
 type Props = {
   imageUrls: string[];
@@ -42,6 +43,37 @@ const Style = {
     transition-property: opacity;
     transition-duration: ${(props) => (props.about === "1.0" ? `0.6s` : `0s`)};
   `,
+  SelectImageArea: styled.div`
+    width: max-content;
+    height: 4px;
+    position: absolute;
+    left: 50%;
+    bottom: 20px;
+    display: flex;
+    gap: 3px;
+  `,
+  SelectImageButton: styled.div`
+    cursor: pointer;
+    width: 14px;
+    height: 4px;
+    background-color: white;
+  `,
+  SelectedImageButton: styled.div`
+    cursor: pointer;
+    width: 30px;
+    height: 4px;
+    background-color: white;
+    overflow: hidden;
+    position: relative;
+  `,
+  SelectedImageButtonShadow: styled.div`
+    cursor: pointer;
+    width: 30px;
+    height: 4px;
+    background-color: #555555;
+    position: absolute;
+    left: -30px;
+  `,
 };
 
 export default function Banner({ imageUrls }: Props) {
@@ -51,7 +83,9 @@ export default function Banner({ imageUrls }: Props) {
   );
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
   const [opacity, setOpacity] = useState<"0.6" | "1.0">("1.0");
-  const [interv, setInterv] = useState<NodeJS.Timer>();
+  const [imageInterv, setImageInterv] = useState<NodeJS.Timer>();
+  const [buttonInterv, setButtonInterv] = useState<NodeJS.Timer>();
+  const [progress, setProgress] = useState<number>(-30);
 
   const handleOpacity = () => {
     setOpacity("0.6");
@@ -79,9 +113,16 @@ export default function Banner({ imageUrls }: Props) {
   };
   useEffect(() => {
     setCurrentImage(imageUrls[currentImageIndex]);
+    setProgress(-30);
+    clearInterval(buttonInterv);
+    setButtonInterv(
+      setInterval(() => {
+        setProgress((current) => (current + 0.25 > 0 ? -30 : current + 0.25));
+      }, 41)
+    );
   }, [currentImageIndex]);
   useEffect(() => {
-    setInterv(
+    setImageInterv(
       setInterval(() => {
         setCurrentImageIndex((current) =>
           current + 1 === imageUrls.length ? 0 : current + 1
@@ -96,11 +137,11 @@ export default function Banner({ imageUrls }: Props) {
       <Style.ImageWrapper
         onMouseEnter={() => {
           setIsBannerHovered(true);
-          clearInterval(interv);
+          clearInterval(imageInterv);
         }}
         onMouseLeave={() => {
           setIsBannerHovered(false);
-          setInterv(
+          setImageInterv(
             setInterval(() => {
               setCurrentImageIndex((current) =>
                 current + 1 === imageUrls.length ? 0 : current + 1
@@ -133,6 +174,38 @@ export default function Banner({ imageUrls }: Props) {
               <Image width={34} height={34} src="/right-arrow.svg" alt="next" />
             </Style.BannerButton>
           </>
+        ) : (
+          <></>
+        )}
+        {imageUrls !== undefined && imageUrls.length >= 2 ? (
+          <Style.SelectImageArea>
+            {imageUrls.map((url, index) => {
+              if (index === currentImageIndex) {
+                return (
+                  <Style.SelectedImageButton
+                    key={v4()}
+                    onClick={() => {
+                      setCurrentImageIndex(index);
+                      handleOpacity();
+                    }}
+                  >
+                    <Style.SelectedImageButtonShadow
+                      style={{ left: `${progress}px` }}
+                    />
+                  </Style.SelectedImageButton>
+                );
+              }
+              return (
+                <Style.SelectImageButton
+                  key={v4()}
+                  onClick={() => {
+                    setCurrentImageIndex(index);
+                    handleOpacity();
+                  }}
+                />
+              );
+            })}
+          </Style.SelectImageArea>
         ) : (
           <></>
         )}

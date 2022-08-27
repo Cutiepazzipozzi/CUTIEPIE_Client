@@ -56,13 +56,13 @@ const Style = {
     cursor: pointer;
     width: 14px;
     height: 4px;
-    background-color: white;
+    background-color: lightgrey;
   `,
   SelectedImageButton: styled.div`
     cursor: pointer;
     width: 30px;
     height: 4px;
-    background-color: white;
+    background-color: lightgrey;
     overflow: hidden;
     position: relative;
   `,
@@ -137,7 +137,9 @@ export default function Banner({ imageUrls }: Props) {
       <Style.ImageWrapper
         onMouseEnter={() => {
           setIsBannerHovered(true);
+          setProgress(-30);
           clearInterval(imageInterv);
+          clearInterval(buttonInterv);
         }}
         onMouseLeave={() => {
           setIsBannerHovered(false);
@@ -148,6 +150,13 @@ export default function Banner({ imageUrls }: Props) {
               );
               handleOpacity();
             }, 5000)
+          );
+          setButtonInterv(
+            setInterval(() => {
+              setProgress((current) =>
+                current + 0.25 > 0 ? -30 : current + 0.25
+              );
+            }, 41)
           );
         }}
       >

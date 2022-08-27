@@ -6,8 +6,7 @@ import Layout from "../src/layout";
 const Style = {
   Wrapper: styled.div`
     width: 100vw;
-    height: auto;
-    padding-top: 245px;
+    height: 200vh;
   `,
 };
 
@@ -20,9 +19,7 @@ const Home: NextPage = () => {
   //   .catch((error) => console.log(error));
   return (
     <Layout>
-      <Style.Wrapper>
-        <span style={{ fontSize: "1em" }}>메인 페이지</span>
-      </Style.Wrapper>
+      <span style={{ fontSize: "1em" }}>메인 페이지</span>
     </Layout>
   );
 };

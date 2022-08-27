@@ -17,7 +17,7 @@ const Style = {
     @media (max-width: 1260px) {
       width: 1260px;
     }
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.9);
     z-index: 1;
   `,
   InnerWrapper: styled.div`

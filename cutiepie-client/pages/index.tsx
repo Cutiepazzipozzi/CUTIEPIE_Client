@@ -20,7 +20,13 @@ const Home: NextPage = () => {
   //   .catch((error) => console.log(error));
   return (
     <Layout>
-      <Banner />
+      <Banner
+        imageUrls={[
+          "https://fromheadtotoe.kr/web/upload/NNEditor/20220819/0de0903f2dc7d1279d1141eac66b559f.jpg",
+          "https://fromheadtotoe.kr/web/upload/NNEditor/20220803/7f20b6fded648cf3d9b2c9436c41812a.jpg",
+          "https://fromheadtotoe.kr/web/upload/NNEditor/20220826/f19fd9dd54100e3ff548f0f3cf166985.png",
+        ]}
+      />
       <span style={{ fontSize: "1em" }}>메인 페이지</span>
     </Layout>
   );

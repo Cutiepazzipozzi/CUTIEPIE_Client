@@ -48,10 +48,11 @@ const Style = {
     justify-content: center;
     position: absolute;
     top: -43px;
-    transform: ${(props) => (props.about === "view" ? "translateY(43px)" : "")};
+    transform: ${(props) =>
+      props.about === "view" ? "translateY(43px)" : "translateY(0)"};
     transition-property: all;
     transition-duration: 0.5s;
-    transition-delay: ${(props) => (props.about === "view" ? "0.3s" : "")};
+    transition-delay: ${(props) => (props.about === "view" ? "0.3s" : "0")};
   `,
 };
 
@@ -88,8 +89,11 @@ export default function UserMenu() {
             style={{
               transitionProperty: "all",
               transitionDuration: "0.3s",
-              transform: isHombuttonView === "view" ? "translateX(62px)" : "",
-              transitionDelay: isHombuttonView === "view" ? "" : "0.3s",
+              transform:
+                isHombuttonView === "view"
+                  ? "translateX(62px)"
+                  : "translateX(0)",
+              transitionDelay: isHombuttonView === "view" ? "0" : "0.3s",
             }}
           >
             <Text.Caption about="pointer">로그인</Text.Caption>

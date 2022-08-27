@@ -1,6 +1,7 @@
 import axios from "axios";
 import type { NextPage } from "next";
 import styled from "styled-components";
+import Banner from "../src/components/banner/Banner";
 import Layout from "../src/layout";
 
 const Style = {
@@ -19,6 +20,7 @@ const Home: NextPage = () => {
   //   .catch((error) => console.log(error));
   return (
     <Layout>
+      <Banner />
       <span style={{ fontSize: "1em" }}>메인 페이지</span>
     </Layout>
   );

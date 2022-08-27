@@ -44,7 +44,7 @@ export default function Nav() {
   const [position, setPosition] = useState<"sticky" | "fixed">("sticky");
   useEffect(() => {
     window.addEventListener("scroll", () => {
-      if (window.scrollY >= 148) {
+      if (window.scrollY >= 150) {
         setPosition("fixed");
       } else {
         if (position === "fixed") {

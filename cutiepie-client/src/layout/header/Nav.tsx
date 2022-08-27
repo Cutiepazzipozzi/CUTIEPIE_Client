@@ -46,10 +46,8 @@ export default function Nav() {
     window.addEventListener("scroll", () => {
       if (window.scrollY >= 150) {
         setPosition("fixed");
-      } else {
-        if (position === "fixed") {
-          setPosition("sticky");
-        }
+      } else if (window.scrollY < 150) {
+        setPosition("sticky");
       }
     });
   }, []);

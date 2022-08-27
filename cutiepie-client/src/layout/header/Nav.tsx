@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 const Style = {
@@ -11,6 +12,10 @@ const Style = {
     @media (max-width: 1260px) {
       width: 1260px;
     }
+    position: ${(props) => props.about};
+    top: 43px;
+    background-color: rgba(255, 255, 255, 0.7);
+    z-index: 1;
   `,
   InnerWrapper: styled.div`
     width: 1260px;
@@ -36,8 +41,20 @@ const Style = {
 };
 
 export default function Nav() {
+  const [position, setPosition] = useState<"sticky" | "fixed">("sticky");
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY >= 148) {
+        setPosition("fixed");
+      } else {
+        if (position === "fixed") {
+          setPosition("sticky");
+        }
+      }
+    });
+  }, []);
   return (
-    <Style.Wrapper>
+    <Style.Wrapper about={position}>
       <Style.InnerWrapper>
         <Style.Menu>
           <Image

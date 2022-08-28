@@ -14,7 +14,7 @@ const Style = {
     }
     position: ${(props) => props.about};
     top: 43px;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.95);
     z-index: 1;
   `,
   InnerWrapper: styled.div`

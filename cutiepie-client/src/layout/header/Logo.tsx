@@ -1,4 +1,6 @@
 import Image from "next/image";
+import { useRouter } from "next/router";
+import { useState } from "react";
 import styled from "styled-components";
 
 const Style = {
@@ -35,10 +37,27 @@ const Style = {
 };
 
 export default function Logo() {
+  const router = useRouter();
+  const [isHover, setIsHover] = useState<boolean>(false);
   return (
     <Style.Wrapper>
       <Style.InnerWrapper>
-        <Image width={486} height={84} src="/logo.png" alt="logo" />
+        <Image
+          width={486}
+          height={84}
+          src="/logo.png"
+          alt="logo"
+          onMouseEnter={() => {
+            setIsHover(true);
+          }}
+          onMouseLeave={() => {
+            setIsHover(false);
+          }}
+          onClick={() => {
+            router.push("/");
+          }}
+          style={{ opacity: isHover ? "0.5" : "1.0", cursor: "pointer" }}
+        />
         <Style.LinkBox>
           <Image
             width={28}

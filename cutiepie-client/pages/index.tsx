@@ -1,8 +1,8 @@
 import axios from "axios";
 import type { NextPage } from "next";
 import styled from "styled-components";
-import Banner from "../src/components/banner/Banner";
-import Layout from "../src/layout";
+import Banner from "../src/components/feature/banner/Banner";
+import Layout from "../src/components/layout";
 
 const Style = {
   Wrapper: styled.div`

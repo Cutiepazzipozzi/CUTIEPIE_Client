@@ -1,7 +1,8 @@
 import Image from "next/image";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { v4 } from "uuid";
+import SelectedImageButton from "./SelectedImageButton";
 
 type Props = {
   imageUrls: string[];
@@ -43,7 +44,7 @@ const Style = {
     transition-property: opacity;
     transition-duration: ${(props) => (props.about === "1.0" ? `0.6s` : `0s`)};
   `,
-  SelectImageArea: styled.div`
+  ImageSelectButtonArea: styled.div`
     width: max-content;
     height: 4px;
     position: absolute;
@@ -58,34 +59,16 @@ const Style = {
     height: 4px;
     background-color: lightgrey;
   `,
-  SelectedImageButton: styled.div`
-    cursor: pointer;
-    width: 30px;
-    height: 4px;
-    background-color: lightgrey;
-    overflow: hidden;
-    position: relative;
-  `,
-  SelectedImageButtonShadow: styled.div`
-    cursor: pointer;
-    width: 30px;
-    height: 4px;
-    background-color: #555555;
-    position: absolute;
-    left: -30px;
-  `,
 };
 
 export default function Banner({ imageUrls }: Props) {
-  const [isBannerHovered, setIsBannerHovered] = useState<boolean>(false);
+  const [isBannerHovered, setIsBannerHovered] = useState<boolean | undefined>();
   const [currentImage, setCurrentImage] = useState<string>(
     imageUrls ? imageUrls[0] : ""
   );
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
   const [opacity, setOpacity] = useState<"0.6" | "1.0">("1.0");
   const [imageInterv, setImageInterv] = useState<NodeJS.Timer>();
-  const [buttonInterv, setButtonInterv] = useState<NodeJS.Timer>();
-  const [progress, setProgress] = useState<number>(-30);
 
   const handleOpacity = () => {
     setOpacity("0.6");
@@ -113,13 +96,6 @@ export default function Banner({ imageUrls }: Props) {
   };
   useEffect(() => {
     setCurrentImage(imageUrls[currentImageIndex]);
-    setProgress(-30);
-    clearInterval(buttonInterv);
-    setButtonInterv(
-      setInterval(() => {
-        setProgress((current) => (current + 0.25 > 0 ? -30 : current + 0.25));
-      }, 41)
-    );
   }, [currentImageIndex]);
   useEffect(() => {
     setImageInterv(
@@ -133,33 +109,24 @@ export default function Banner({ imageUrls }: Props) {
   }, []);
 
   return (
-    <Style.Wrapper>
-      <Style.ImageWrapper
-        onMouseEnter={() => {
-          setIsBannerHovered(true);
-          setProgress(-30);
-          clearInterval(imageInterv);
-          clearInterval(buttonInterv);
-        }}
-        onMouseLeave={() => {
-          setIsBannerHovered(false);
-          setImageInterv(
-            setInterval(() => {
-              setCurrentImageIndex((current) =>
-                current + 1 === imageUrls.length ? 0 : current + 1
-              );
-              handleOpacity();
-            }, 5000)
-          );
-          setButtonInterv(
-            setInterval(() => {
-              setProgress((current) =>
-                current + 0.25 > 0 ? -30 : current + 0.25
-              );
-            }, 41)
-          );
-        }}
-      >
+    <Style.Wrapper
+      onMouseEnter={() => {
+        setIsBannerHovered(true);
+        clearInterval(imageInterv);
+      }}
+      onMouseLeave={() => {
+        setIsBannerHovered(false);
+        setImageInterv(
+          setInterval(() => {
+            setCurrentImageIndex((current) =>
+              current + 1 === imageUrls.length ? 0 : current + 1
+            );
+            handleOpacity();
+          }, 5000)
+        );
+      }}
+    >
+      <Style.ImageWrapper>
         {currentImage && (
           <Style.BannerImage
             src={currentImage}
@@ -167,7 +134,6 @@ export default function Banner({ imageUrls }: Props) {
             about={opacity}
           />
         )}
-
         {isBannerHovered && imageUrls !== undefined && imageUrls.length >= 2 ? (
           <>
             <Style.BannerButton
@@ -187,21 +153,14 @@ export default function Banner({ imageUrls }: Props) {
           <></>
         )}
         {imageUrls !== undefined && imageUrls.length >= 2 ? (
-          <Style.SelectImageArea>
+          <Style.ImageSelectButtonArea>
             {imageUrls.map((url, index) => {
               if (index === currentImageIndex) {
                 return (
-                  <Style.SelectedImageButton
-                    key={v4()}
-                    onClick={() => {
-                      setCurrentImageIndex(index);
-                      handleOpacity();
-                    }}
-                  >
-                    <Style.SelectedImageButtonShadow
-                      style={{ left: `${progress}px` }}
-                    />
-                  </Style.SelectedImageButton>
+                  <SelectedImageButton
+                    isBannerHovered={isBannerHovered}
+                    currentImageIndex={currentImageIndex}
+                  />
                 );
               }
               return (
@@ -214,7 +173,7 @@ export default function Banner({ imageUrls }: Props) {
                 />
               );
             })}
-          </Style.SelectImageArea>
+          </Style.ImageSelectButtonArea>
         ) : (
           <></>
         )}

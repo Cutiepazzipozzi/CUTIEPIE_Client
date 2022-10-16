@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
@@ -98,7 +99,7 @@ export default function UserMenu() {
           >
             <Text.Caption about="pointer">로그인</Text.Caption>
             <Margin direction="row" size={10} />
-            <Text.Caption about="pointer">회원가입</Text.Caption>
+            <Link href={"/join"}><Text.Caption about="pointer">회원가입</Text.Caption></Link>
             <Margin direction="row" size={10} />
             <Text.Caption about="pointer">장바구니</Text.Caption>
             <Margin direction="row" size={2} />

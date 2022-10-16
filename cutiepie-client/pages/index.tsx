@@ -1,4 +1,3 @@
-import axios from "axios";
 import type { NextPage } from "next";
 import styled from "styled-components";
 import Banner from "../src/components/feature/banner/Banner";
@@ -12,12 +11,6 @@ const Style = {
 };
 
 const Home: NextPage = () => {
-  // axios
-  //   .get("http://localhost:8080/products/list")
-  //   .then((data) => {
-  //     console.log(data);
-  //   })
-  //   .catch((error) => console.log(error));
   return (
     <Layout>
       <Banner
